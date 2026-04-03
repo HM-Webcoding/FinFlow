@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+
+@layer base {
+
+  /* ══ LIGHT MODE ══════════════════════════════════ */
+  :root {
+    --background:             0 0% 100%;
+    --foreground:             222 47% 11%;
+    --card:                   0 0% 100%;
+    --card-foreground:        222 47% 11%;
+    --popover:                0 0% 100%;
+    --popover-foreground:     222 47% 11%;
+    --primary:                221 83% 53%;
+    --primary-foreground:     210 40% 98%;
+    --secondary:              210 40% 96%;
+    --secondary-foreground:   222 47% 11%;
+    --muted:                  210 40% 96%;
+    --muted-foreground:       215 16% 47%;
+    --accent:                 210 40% 96%;
+    --accent-foreground:      222 47% 11%;
+    --destructive:            0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border:                 214 32% 91%;
+    --input:                  214 32% 91%;
+    --ring:                   221 83% 53%;
+    --radius:                 0.75rem;
+    --page-bg:                210 20% 97%;
+
+    /* Sidebar — light: clean white surface */
+    --sidebar-bg:             0 0% 100%;
+    --sidebar-fg:             222 47% 13%;
+    --sidebar-muted:          215 16% 48%;
+    --sidebar-border:         214 32% 91%;
+    --sidebar-hover:          210 40% 96%;
+    --sidebar-active-bg:      221 83% 53%;
+    --sidebar-active-fg:      0 0% 100%;
+    --sidebar-icon-bg:        214 32% 93%;
+    --sidebar-icon-active:    221 83% 43%;
+  }
+
+  /* ══ DARK MODE ════════════════════════════════════ */
+  .dark {
+    --background:             222 47% 8%;
+    --foreground:             210 40% 96%;
+    --card:                   222 40% 11%;
+    --card-foreground:        210 40% 96%;
+    --popover:                222 40% 11%;
+    --popover-foreground:     210 40% 96%;
+    --primary:                217 91% 65%;
+    --primary-foreground:     222 47% 8%;
+    --secondary:              217 25% 18%;
+    --secondary-foreground:   210 40% 96%;
+    --muted:                  217 25% 18%;
+    --muted-foreground:       215 20% 55%;
+    --accent:                 217 25% 18%;
+    --accent-foreground:      210 40% 96%;
+    --destructive:            0 62% 55%;
+    --destructive-foreground: 210 40% 98%;
+    --border:                 217 25% 18%;
+    --input:                  217 25% 18%;
+    --ring:                   217 91% 65%;
+    --page-bg:                222 47% 6%;
+
+    /* Sidebar — dark: deep navy */
+    --sidebar-bg:             222 47% 7%;
+    --sidebar-fg:             210 40% 92%;
+    --sidebar-muted:          215 15% 48%;
+    --sidebar-border:         217 25% 15%;
+    --sidebar-hover:          217 25% 14%;
+    --sidebar-active-bg:      217 91% 60%;
+    --sidebar-active-fg:      0 0% 100%;
+    --sidebar-icon-bg:        217 25% 16%;
+    --sidebar-icon-active:    217 91% 50%;
+  }
+
+  * { @apply border-border box-border; }
+
+  html { font-family: 'DM Sans', sans-serif; }
+
+  body {
+    background-color: hsl(var(--page-bg));
+    color: hsl(var(--foreground));
+    @apply antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.4); }
+}
+
+@layer components {
+  .fin-card {
+    @apply bg-card rounded-xl border border-border shadow-card;
+  }
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-muted-foreground;
+  }
+  .display-font { font-family: 'Syne', sans-serif; }
+  .mono-font    { font-family: 'DM Mono', monospace; }
+
+  /* ── Sidebar base ──────────────────────────── */
+  .sidebar {
+    background-color: hsl(var(--sidebar-bg));
+    border-right: 1px solid hsl(var(--sidebar-border));
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  /* Nav link — idle */
+  .sidebar-link {
+    color: hsl(var(--sidebar-muted));
+    transition: all 0.15s ease;
+  }
+  .sidebar-link:hover {
+    color: hsl(var(--sidebar-fg));
+    background-color: hsl(var(--sidebar-hover));
+  }
+
+  /* Nav link — active */
+  .sidebar-link.active {
+    color: hsl(var(--sidebar-active-fg));
+    background-color: hsl(var(--sidebar-active-bg));
+    box-shadow: 0 1px 6px 0 hsl(var(--sidebar-active-bg) / 0.4);
+  }
+
+  /* Nav icon wrapper */
+  .sidebar-icon {
+    background-color: hsl(var(--sidebar-icon-bg));
+    transition: background-color 0.15s ease;
+  }
+  .sidebar-link:hover .sidebar-icon {
+    background-color: hsl(var(--sidebar-border));
+  }
+  .sidebar-link.active .sidebar-icon {
+    background-color: hsl(var(--sidebar-icon-active));
+  }
+
+  /* Theme toggle row */
+  .sidebar-theme-btn {
+    color: hsl(var(--sidebar-muted));
+    transition: all 0.15s ease;
+  }
+  .sidebar-theme-btn:hover {
+    color: hsl(var(--sidebar-fg));
+    background-color: hsl(var(--sidebar-hover));
+  }
+
+  /* User card at bottom */
+  .sidebar-user {
+    background-color: hsl(var(--sidebar-hover));
+    border: 1px solid hsl(var(--sidebar-border));
+  }
+}
