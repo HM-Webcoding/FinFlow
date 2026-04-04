@@ -1,16 +1,23 @@
 "use client"
-import {
-  PieChart, Pie, Cell, Tooltip, ResponsiveContainer,
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend,
-} from "recharts"
-import { TrendingUp, TrendingDown, Minus, Lightbulb } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { SectionHeader, ProgressBar, ObservationCard, TrendBadge } from "@/components/shared"
+import { ObservationCard, ProgressBar, TrendBadge } from "@/components/shared"
 import { ChartTooltip, PieTooltip } from "@/components/shared/ChartTooltip"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 import { useInsights } from "@/hooks/useFinanceData"
 import { formatCurrency } from "@/utils/format"
+import { Lightbulb } from "lucide-react"
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis, YAxis,
+} from "recharts"
 
 export default function Insights() {
   const { topCategory, mom, monthly, summary, categoryBreakdown, observations } = useInsights()
@@ -157,11 +164,11 @@ export default function Insights() {
                 {i > 0 && <Separator className="mb-4" />}
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm" style={{ backgroundColor: cat.bg }}>
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm text-foreground" style={{ backgroundColor: cat.bg }}>
                       {cat.icon}
                     </div>
                     <div>
-                      <p className="font-semibold text-sm text-slate-800">{cat.label}</p>
+                      <p className="font-semibold text-sm text-muted-foreground">{cat.label}</p>
                       <p className="text-xs text-slate-400">{cat.count} transaction{cat.count !== 1 ? "s" : ""}</p>
                     </div>
                   </div>
