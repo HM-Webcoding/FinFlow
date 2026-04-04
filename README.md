@@ -6,7 +6,11 @@ A production-quality personal finance dashboard built with **Next.js 15 App Rout
 
 ---
 
-## Quick Start
+## Live Preview
+
+https://fin-flow-virid-seven.vercel.app
+
+## Quick Start on localhost
 
 ```bash
 # 1. Clone / extract the project
@@ -26,21 +30,22 @@ open http://localhost:3000
 
 ## Tech Stack
 
-| Concern         | Choice                                      |
-|-----------------|---------------------------------------------|
-| Framework       | Next.js 15 (App Router, RSC)                |
-| UI Primitives   | shadcn/ui (Radix UI)                        |
-| Charts          | Recharts 2                                  |
-| Styling         | Tailwind CSS v3                             |
-| State           | React Context + useState + useMemo          |
-| Typography      | Syne (display) + DM Sans (body) + DM Mono  |
-| Language        | JavaScript (JSX)                            |
+| Concern       | Choice                                    |
+| ------------- | ----------------------------------------- |
+| Framework     | Next.js 15 (App Router, RSC)              |
+| UI Primitives | shadcn/ui (Radix UI)                      |
+| Charts        | Recharts 2                                |
+| Styling       | Tailwind CSS v3                           |
+| State         | React Context + useState + useMemo        |
+| Typography    | Syne (display) + DM Sans (body) + DM Mono |
+| Language      | JavaScript (JSX)                          |
 
 ---
 
 ## Features
 
 ### Dashboard
+
 - **4 stat cards** — Net Balance, Total Income, Total Expenses, Total Saved (with savings rate)
 - **Area chart** — Income vs Expenses vs Savings monthly trend with gradient fills
 - **Horizontal bar chart** — Expenses ranked by category with per-category colors
@@ -48,6 +53,7 @@ open http://localhost:3000
 - **Monthly summary table** — Month-by-month income/expense/savings with totals footer
 
 ### Transactions
+
 - **Sortable table** — Click column headers (Date, Description, Amount) to toggle asc/desc
 - **Live search** — Searches across description, note, and category label
 - **Quick filters** — Type (income/expense) and category dropdowns
@@ -63,6 +69,7 @@ open http://localhost:3000
   - Loading state on submit
 
 ### Insights
+
 - **Top spending category** — With icon, amount, percentage, and progress bar
 - **Month-over-month comparison** — This month vs last month with trend badge (↑/↓/—)
 - **Last month card** — Expenses and savings
@@ -78,16 +85,17 @@ open http://localhost:3000
 - **Summary KPI row** — Savings rate, avg per transaction, transaction count, net savings
 
 ### Role-Based UI (RBAC)
+
 Switch roles via the dropdown in the top-right navbar:
 
-| Feature                   | Viewer | Admin |
-|---------------------------|--------|-------|
-| View all charts           | ✅     | ✅    |
-| View transactions         | ✅     | ✅    |
-| Filter & search           | ✅     | ✅    |
-| Add Transaction button    | ❌     | ✅    |
-| Add Transaction modal     | ❌     | ✅    |
-| Admin badge in navbar     | ❌     | ✅    |
+| Feature                | Viewer | Admin |
+| ---------------------- | ------ | ----- |
+| View all charts        | ✅     | ✅    |
+| View transactions      | ✅     | ✅    |
+| Filter & search        | ✅     | ✅    |
+| Add Transaction button | ❌     | ✅    |
+| Add Transaction modal  | ❌     | ✅    |
+| Admin badge in navbar  | ❌     | ✅    |
 
 Role state is managed in React Context — no backend required.
 
@@ -154,18 +162,23 @@ src/
 ## Architecture Decisions
 
 ### State Management
+
 Single `AppContext` with `useState` + `useMemo`. This keeps state simple and avoids prop drilling without introducing Redux/Zustand. Derived data is computed in custom hooks using `useMemo` to prevent unnecessary recalculations.
 
 ### Data Layer Separation
+
 All data computation (grouping, filtering, analytics) lives in `utils/analytics.js` as pure functions — fully testable, zero React coupling. Hooks in `useFinanceData.js` are thin wrappers that connect the pure functions to React state.
 
 ### shadcn/ui Approach
+
 Components are source-owned (copy-paste), not imported from a black-box library. This means they're fully customisable and don't carry runtime overhead from unused primitives.
 
 ### RBAC Implementation
+
 Role is a simple string in Context (`"viewer"` | `"admin"`). The `isAdmin` boolean derived from it is passed via context. UI conditionally renders admin controls — no routes, guards, or middleware needed for a frontend-only assessment.
 
 ### Filtering Architecture
+
 All filter state lives in Context as a flat object. `filterTransactions()` in analytics.js accepts filters and returns a new sorted array — no mutations. This makes the filtered view reactive to any combination of filters without complex subscription logic.
 
 ---
@@ -181,4 +194,4 @@ All filter state lives in Context as a flat object. `filterTransactions()` in an
 
 ---
 
-*Built by Hamidur Rahman — April 2026 · Zorvyn FinTech Frontend Assessment*
+_Built by Hamidur Rashid — April 2026_

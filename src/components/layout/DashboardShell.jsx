@@ -55,7 +55,7 @@ export default function DashboardShell() {
       {/* ══════════════ SIDEBAR ══════════════════════ */}
       <aside
         className={cn(
-          "sidebar fixed top-0 left-0 z-40 flex flex-col",
+          "sidebar fixed top-0 left-0 z-40 flex flex-col h-dvh",
           "w-64 transition-transform duration-300 ease-in-out",
           "lg:translate-x-0 lg:static lg:z-auto lg:shrink-0",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -65,7 +65,7 @@ export default function DashboardShell() {
         {/* ── Brand header ──────────────────────────── */}
         <div
           className="flex items-center justify-between px-5 h-16 border-b"
-          style={{ borderColor: "hsl(var(--sidebar-border))" }}
+          style={{ borderColor: "hsl(var(--sidebar-border))" }} 
         >
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center shadow-sm shrink-0">
