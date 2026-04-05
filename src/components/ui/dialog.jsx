@@ -1,8 +1,8 @@
 "use client"
-import * as React from "react"
+import { cn } from "@/lib/utils"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
-import { cn } from "@/lib/utils"
+import * as React from "react"
 
 const Dialog        = DialogPrimitive.Root
 const DialogTrigger = DialogPrimitive.Trigger
@@ -30,7 +30,7 @@ const DialogContent = React.forwardRef(({ className, children, ...props }, ref) 
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-lg p-1 opacity-60 hover:opacity-100 hover:bg-slate-100 transition-all focus:outline-none focus:ring-2 focus:ring-ring">
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-lg p-1 opacity-60 hover:opacity-100 hover:bg-slate-100 transition-all focus:outline-none focus:ring-2 focus:ring-ring text-rose-500">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -50,4 +50,5 @@ const DialogDescription = React.forwardRef(({ className, ...props }, ref) => (
 DialogTitle.displayName       = DialogPrimitive.Title.displayName
 DialogDescription.displayName = DialogPrimitive.Description.displayName
 
-export { Dialog, DialogPortal, DialogOverlay, DialogTrigger, DialogClose, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription }
+export { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger }
+

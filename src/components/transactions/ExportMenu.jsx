@@ -64,7 +64,7 @@ export default function ExportMenu({ transactions }) {
       {open && (
         <div
           className={cn(
-            "absolute right-0 top-full mt-1.5 z-50 w-56",
+            "absolute left-0 md:right-0 md:left-auto top-full mt-1.5 z-50 w-56",
             "bg-card border border-border rounded-xl shadow-modal",
             "animate-in fade-in-0 zoom-in-95 duration-100 origin-top-right"
           )}
