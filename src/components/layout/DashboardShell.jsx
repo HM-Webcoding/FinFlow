@@ -239,7 +239,7 @@ export default function DashboardShell() {
                 className="text-xs font-semibold truncate leading-none mb-0.5"
                 style={{ color: "hsl(var(--sidebar-fg))" }}
               >
-                Hamidur Rahman
+                Hamidur Rashid
               </p>
               <p className="text-xs truncate" style={{ color: "hsl(var(--sidebar-muted))" }}>
                 {isAdmin ? "Administrator" : "Viewer"}

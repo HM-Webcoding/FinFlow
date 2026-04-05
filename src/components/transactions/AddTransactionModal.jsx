@@ -1,13 +1,13 @@
 "use client"
-import { useState } from "react"
-import { useApp } from "@/context/AppContext"
-import { CATEGORIES } from "@/data/transactions"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useApp } from "@/context/AppContext"
+import { CATEGORIES } from "@/data/transactions"
 import { cn } from "@/lib/utils"
+import { useState } from "react"
 
 const EMPTY_FORM = {
   date: new Date().toISOString().slice(0, 10),

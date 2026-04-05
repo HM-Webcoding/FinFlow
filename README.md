@@ -1,7 +1,5 @@
 # FinFlow — Finance Dashboard
 
-> **Zorvyn FinTech · Frontend Developer Intern Assessment**
-
 A production-quality personal finance dashboard built with **Next.js 15 App Router**, **shadcn/ui**, **Recharts**, and **Tailwind CSS**.
 
 ---
@@ -55,6 +53,7 @@ open http://localhost:3000
 ### Transactions
 
 - **Sortable table** — Click column headers (Date, Description, Amount) to toggle asc/desc
+- **Export all data** — Click the export button to download data in CSV or JSON format.
 - **Live search** — Searches across description, note, and category label
 - **Quick filters** — Type (income/expense) and category dropdowns
 - **Advanced filters** — Date range (from/to) and amount range (min/max) in collapsible panel
