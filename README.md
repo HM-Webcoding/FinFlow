@@ -83,6 +83,13 @@ open http://localhost:3000
   - Spending concentration warning
 - **Summary KPI row** — Savings rate, avg per transaction, transaction count, net savings
 
+### Storage, API Integration
+
+- Data Persistence (Local Storage) — User data is stored in the browser, so it remains available after page refresh.
+- Mock API Integration — Uses a mock API to simulate real-world data fetching and interactions.
+
+Reset Demo Data — Restore the app to its initial demo state using the reset button, while preserving the original default dataset.
+
 ### Role-Based UI (RBAC)
 
 Switch roles via the dropdown in the top-right navbar:
@@ -95,6 +102,7 @@ Switch roles via the dropdown in the top-right navbar:
 | Add Transaction button | ❌     | ✅    |
 | Add Transaction modal  | ❌     | ✅    |
 | Admin badge in navbar  | ❌     | ✅    |
+| Reset Demo Data        | ❌     | ✅    |
 
 Role state is managed in React Context — no backend required.
 
@@ -105,55 +113,68 @@ Role state is managed in React Context — no backend required.
 ```
 src/
 ├── app/
-│   ├── layout.jsx              # Root layout — wraps AppProvider
-│   ├── page.jsx                # Entry point → DashboardShell
-│   └── globals.css             # Tailwind + shadcn CSS variables + Google Fonts
+│   ├── dashboard/              # Next.js route — /dashboard
+│   ├── insights/               # Next.js route — /insights
+│   ├── transactions/           # Next.js route — /transactions
+│   ├── globals.css             # Tailwind + shadcn CSS variables + Google Fonts
+│   ├── layout.jsx              # Root layout — wraps AppProvider + DashboardShell
+│   └── page.jsx                # Root "/" — entry point
 │
 ├── components/
-│   ├── ui/                     # shadcn/ui primitives (source-owned)
-│   │   ├── button.jsx
-│   │   ├── card.jsx
-│   │   ├── badge.jsx
-│   │   ├── input.jsx
-│   │   ├── label.jsx
-│   │   ├── select.jsx
-│   │   ├── dialog.jsx
-│   │   ├── separator.jsx
-│   │   ├── tabs.jsx
-│   │   └── tooltip.jsx
+│   ├── dashboard/
+│   │   └── Dashboard.jsx       # Stat cards, area chart, bar chart, monthly table
 │   │
-│   ├── shared/                 # App-level reusable components
-│   │   ├── index.jsx           # StatCard, EmptyState, ProgressBar, ObservationCard, etc.
-│   │   └── ChartTooltip.jsx    # Recharts custom tooltips
+│   ├── insights/
+│   │   └── Insights.jsx        # KPI cards, donut chart, savings bar, observations
 │   │
 │   ├── layout/
-│   │   └── DashboardShell.jsx  # Sticky navbar + role switcher + tab routing
+│   │   ├── DashboardShell.jsx  # Main shell — wraps sidebar + top header + page content
+│   │   ├── NavItems.jsx        # Sidebar navigation item list and active state logic
+│   │   └── Sidebar.jsx         # Left sidebar — brand, nav, role switcher, theme toggle
 │   │
-│   ├── dashboard/
-│   │   └── Dashboard.jsx       # Stat cards + area chart + bar chart + monthly table
+│   ├── shared/
+│   │   ├── ChartTooltip.jsx    # Recharts custom tooltips (shared across all charts)
+│   │   └── index.jsx           # StatCard, EmptyState, ProgressBar, ObservationCard, etc.
 │   │
 │   ├── transactions/
-│   │   ├── Transactions.jsx    # Filter bar + sortable table + empty states
-│   │   └── AddTransactionModal.jsx  # Admin-only add form
+│   │   ├── AddTransactionModal.jsx  # Admin-only add transaction form with validation
+│   │   ├── ExportMenu.jsx           # CSV / JSON export dropdown with loading states
+│   │   ├── SortButton.jsx           # Reusable sortable column header button
+│   │   └── Transactions.jsx         # Filter bar, sortable table, empty states
 │   │
-│   └── insights/
-│       └── Insights.jsx        # KPI cards + donut + savings bar + observations
+│   └── ui/                     # shadcn/ui primitives (source-owned, fully customisable)
+│       ├── apiErrorBanner.jsx  # Dismissible API error banner
+│       ├── badge.jsx
+│       ├── button.jsx
+│       ├── card.jsx
+│       ├── dialog.jsx
+│       ├── input.jsx
+│       ├── label.jsx
+│       ├── mutatingIndicator.jsx  # Spinner + "Saving…" label shown during writes
+│       ├── select.jsx
+│       ├── separator.jsx
+│       ├── skeleton.jsx           # Animated skeleton for initial page load state
+│       ├── tabs.jsx
+│       └── tooltip.jsx
 │
 ├── context/
-│   └── AppContext.jsx          # Global state: role, transactions, filters + all actions
+│   └── AppContext.jsx          # Global state: role, transactions, filters, theme, API calls
 │
 ├── data/
 │   └── transactions.js         # 40 mock transactions + CATEGORIES config
 │
 ├── hooks/
-│   └── useFinanceData.js       # Memoized derived data hooks
+│   ├── useExport.js            # CSV / JSON export logic — pure hook, zero UI coupling
+│   └── useFinanceData.js       # Memoized derived data hooks (useSummary, useInsights, etc.)
 │
-├── utils/
-│   ├── analytics.js            # Pure functions: summaries, grouping, filtering, observations
-│   └── format.js               # formatCurrency, formatDate, formatMonthYear, etc.
+├── lib/
+│   ├── mockApi.js              # Simulated async API — serial write queue, error rate config
+│   ├── storage.js              # localStorage wrapper — namespaced, versioned, SSR-safe
+│   └── utils.js                # shadcn cn() merge helper
 │
-└── lib/
-    └── utils.js                # shadcn cn() merge helper
+└── utils/
+    ├── analytics.js            # Pure functions: summaries, grouping, filtering, observations
+    └── format.js               # formatCurrency, formatDate, formatMonthYear, etc.
 ```
 
 ---
