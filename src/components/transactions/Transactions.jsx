@@ -41,7 +41,7 @@ export default function Transactions() {
     <div className="space-y-4">
 
       {/* ── Header ──────────────────────────────────── */}
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <h1 className="text-xl font-bold text-foreground" style={{ fontFamily: "'Syne', sans-serif" }}>
             Transactions
